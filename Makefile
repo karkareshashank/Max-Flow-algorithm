@@ -42,14 +42,15 @@ $(INPUT_PATH)functions.o : $(patsubst %.o, %.cpp, $@) $(INPUT_PATH)functions.h
 
          
 # Compilation of the Main Code
-ifneq ($(EXE_NAME), clean)
-$(EXE_NAME) : $(EXE_NAME).o $(OBJECTS)
-	$(CC) -o $(EXE_NAME)   $(EXE_NAME).o $(OBJECTS)  
+ifneq ($(MAKECMDGOALS), clean)
+$(MAKECMDGOALS) : $(MAKECMDGOALS).o $(OBJECTS)
+	$(CC) -o $(MAKECMDGOALS) $(MAKECMDGOALS).o $(OBJECTS)  
 
 # Main Code Object File
-$(EXE_NAME).o : $(EXE_NAME).cpp $(HEADERS)
-	$(CC) -c $(EXE_NAME).cpp 
+$(MAKECMDGOALS).o : $(MAKECMDGOALS).cpp $(HEADERS) 
+	$(CC) -c $(MAKECMDGOALS).cpp 
 endif
+
 
         
 

@@ -38,26 +38,27 @@ void _printAdjList(struct node** adj_list,int nVertex, int mEdges)
 }
 
 // Defining the function _printAugmentingPath()
-void _printAugmentingPath(vector<int>* aug_path,int kValue)
+void _printAugmentingPath(vector<int>* aug_path,int kValue,FILE* ofp)
 {
 	vector<int>::iterator it;
 	it = aug_path->end();
 	it--;
 
-	printf("The augmenting path at iteration %d is \n",kValue);
+	fprintf(ofp,"The augmenting path at iteration %d is \n",kValue);
 	for(;it >= aug_path->begin();it--)
-		printf("%d ",*it);
-	printf("\n");	
+		fprintf(ofp,"%d ",*it);
+	fprintf(ofp,"\n");	
 }
 
 
 
 // Defining the function _printMaxFlowAndValues()
-void _printMaxFlowAndValues(int** res_graph_am,int** graph_array,int max_flow,int nVertex)
+void _printMaxFlowAndValues(int** res_graph_am,int** graph_array,int max_flow,int nVertex,FILE* ofp)
 {
 	int i,j;
-	printf("\n\nFlow value=%d\n",max_flow);
-	printf("The max-flow is\n");
+	int flow;
+	fprintf(ofp,"\n\nFlow value=%d\n",max_flow);
+	fprintf(ofp,"The max-flow is\n");
 	
 	for(i = 1;i<= nVertex;i++)
 	{
@@ -65,7 +66,9 @@ void _printMaxFlowAndValues(int** res_graph_am,int** graph_array,int max_flow,in
 		{
 			if(graph_array[i][j] != 0)
 			{
-				printf("%d %d %d\n",i,j,graph_array[i][j] - res_graph_am[i][j]);
+				flow = graph_array[i][j] - res_graph_am[i][j];
+				if(flow != 0)
+					fprintf(ofp,"%d %d %d\n",i,j,flow);
 			}
 
 		}

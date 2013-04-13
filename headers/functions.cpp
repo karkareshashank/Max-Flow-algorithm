@@ -126,12 +126,19 @@ void _augmentResidualGraph(int** adj_mat,struct node** adj_list,vector<int>* aug
 		{
 			//if its first item to remove
 			if(adj_list[*it]->vertex == *(it-1))
+			{
 				adj_list[*it] = adj_list[*it]->next;
+				temp->next = NULL;
+				free(temp);
+			}
 			else  // if its not the first item
 			{
 				while(temp->next->vertex != *(it-1))
 		                	temp = temp->next;
-		                temp->next = temp->next->next;
+				prev_temp = temp->next;
+			        temp->next = temp->next->next;
+				prev_temp->next = NULL;
+				free(prev_temp);
 			}
 
 		}
@@ -172,7 +179,7 @@ void _augmentResidualGraph(int** adj_mat,struct node** adj_list,vector<int>* aug
 
 
 // Defining the function _calculateMinCut()
-void  _calculateMinCut(int** adj_mat,struct node** adj_list,int** graph,int nVertex,int mEdges,int source,int sink)
+void  _calculateMinCut(int** adj_mat,struct node** adj_list,int** graph,int nVertex,int mEdges,int source,int sink,FILE* ofp)
 {
 	int x = 0;
 	int i;
@@ -189,16 +196,16 @@ void  _calculateMinCut(int** adj_mat,struct node** adj_list,int** graph,int nVer
 				min_cut_cap += graph[it->first][i];
 		}
 	}
-	printf("\n\nMin-cut capacity = %d \n",min_cut_cap);
+	fprintf(ofp,"\n\nMin-cut capacity = %d \n",min_cut_cap);
 	
 
-	printf("Min-cut is \n");
+	fprintf(ofp,"Min-cut is \n");
        	for ( auto it = path.begin(); it != path.end(); ++it )
 		if(it == path.begin())
-			printf("%d",it->first); 
+			fprintf(ofp,"%d",it->first); 
 		else
-			printf(", %d",it->first);
-	printf("\n");
+			fprintf(ofp,", %d",it->first);
+	fprintf(ofp,"\n");
 	
 
 
@@ -207,13 +214,13 @@ void  _calculateMinCut(int** adj_mat,struct node** adj_list,int** graph,int nVer
 		if(path.count(i) == 0)
 		{
 			if(x == 0)
-				printf("%d",i);
+				fprintf(ofp,"%d",i);
 			else
-				printf(", %d",i);
+				fprintf(ofp,", %d",i);
 			x++;
 		}
 
 	}
-	printf("\n");
+	fprintf(ofp,"\n");
 	
 }

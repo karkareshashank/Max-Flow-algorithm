@@ -12,7 +12,7 @@ struct node{
 
 void _printGraph(int**,int ,int);
 void _printAdjList(struct node**,int , int);
-void _printAugmentingPath( std::vector<int>* ,int);
-void _printMaxFlowAndValues(int**,int**,int,int);
+void _printAugmentingPath( std::vector<int>* ,int,FILE*);
+void _printMaxFlowAndValues(int**,int**,int,int,FILE*);
 
 #endif
