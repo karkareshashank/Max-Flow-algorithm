@@ -294,11 +294,14 @@ void _modifiedDijkstraForWidestPath(struct node** adj_list, unordered_map<int,in
 				}
 
 			}	
+			//printf("ho !!\n");
 			temp = temp->next;
+			//printf("hi !!\n");
 		}
-	
+		//printf("exit!!\n");
 
 	}
-	
+	for(auto it = path->begin();it != path->end();it++)
+		printf("%d %d \n",it->first,it->second);
 	
 }
