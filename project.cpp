@@ -89,10 +89,11 @@ int main(int argc,char** argv)
 	_initArray(graph_array,nVertex,mEdges);
 	_initArray(res_graph_am,nVertex,mEdges);
 	_readingInput(graph_array,fp,nVertex,mEdges);
+	// Creating Zero Flow residual graph
 	_initResidualGraph(res_graph_am,res_graph_al,graph_array,nVertex,mEdges);
 
 
-
+	// Starting max-flow algorithm
 	while(true)
 	{
 		iterationCount++;
